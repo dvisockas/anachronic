@@ -1,8 +1,36 @@
 # Async::Methods
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/async/methods`. To experiment with that code, run `bin/console` for an interactive prompt.
+Simply execute your methods in a background process (ActiveJob, Sidekiq, etc...)
 
-TODO: Delete this and the text above, and describe your gem
+Instead of having to write a wrapper for every class, just add `async` before your method:
+
+### Usual boilerplate case:
+```ruby
+class Human
+  def speak
+    puts('Truth!')
+  end
+end
+
+class HumanJob < ApplicationJob
+  def perform(human)
+    human.speak
+  end
+end
+
+HumanJob.perform_later(Human.new)
+```
+
+### You can now write:
+```ruby
+class Human
+  async def speak
+    puts('Truth!')
+  end
+end
+
+Human.new.speak
+```
 
 ## Installation
 

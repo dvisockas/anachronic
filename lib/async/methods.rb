@@ -9,7 +9,7 @@ module Async
       alias_method new_name, method_name
 
       define_method(method_name) do |*args|
-        background_executor.perform_later(self, new_name, *args)
+        BackgroundExecutor.call(self, new_name, *args)
       end
     end
   end

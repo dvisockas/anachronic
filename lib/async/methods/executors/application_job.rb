@@ -9,10 +9,10 @@ module Async
         end
 
         def self.default_executor
-          @@default_executor ||= begin
+          @default_executor ||= begin
             Class.new(ApplicationJob) do
               def perform_later(instance, method, *args)
-                instance.send(method, *args)
+                instance.public_send(method, *args)
               end
             end
           end

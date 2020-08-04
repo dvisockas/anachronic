@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require "async/methods/version"
+require "async/methods/background_executor"
+require "async/methods/error"
 
 module Async
   module Methods
-    class Error < StandardError; end
-
-     def async(method_name)
+    def async(method_name)
       new_name = "async__#{method_name}".to_sym
       alias_method new_name, method_name
 

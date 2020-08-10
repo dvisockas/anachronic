@@ -1,16 +1,16 @@
-require_relative 'lib/async/methods/version'
+require_relative 'lib/anachronic/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "async-methods"
-  spec.version       = Async::Methods::VERSION
-  spec.authors       = ["Danielius Visockas"]
-  spec.email         = ["danieliusvisockas@gmail.com"]
+  spec.name          = 'anachronic'
+  spec.version       = Anachronic::VERSION
+  spec.authors       = ['Danielius Visockas']
+  spec.email         = ['danieliusvisockas@gmail.com']
 
   spec.summary       = %q{Moving your method execution to the world of asynchronity}
   spec.description   = %q{Removing boilerplate from async code}
-  spec.homepage      = 'https://github.com/dvisockas/async-methods'
+  spec.homepage      = 'https://github.com/dvisockas/anachronic'
   spec.license       = "MIT"
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.1.0")
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.1.0')
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
 

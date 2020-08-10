@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-module Async
-  module Methods
+module Anachronic
     module Executors
       class ApplicationJob
         def self.call(instance, method, *args)

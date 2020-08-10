@@ -24,6 +24,8 @@ HumanJob.perform_later(Human.new)
 ### You can now write:
 ```ruby
 class Human
+  extend Anachronic
+
   async def speak
     puts('Truth!')
   end
@@ -69,4 +71,7 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Async::Methods project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/dvisockas/anachronic/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Anachronic project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/dvisockas/anachronic/blob/master/CODE_OF_CONDUCT.md).
+
+## Inspired by
+- [Memoist](https://github.com/matthewrudy/memoist)

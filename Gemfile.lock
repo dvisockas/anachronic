@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    anachronic (0.42.2)
+    anachronic (0.43.0)
 
 GEM
   remote: https://rubygems.org/

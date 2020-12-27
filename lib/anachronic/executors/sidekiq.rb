@@ -2,19 +2,19 @@
 
 module Anachronic
   module Executors
-    # Default executor for ApplicationJob backend
-    class ApplicationJob
+    # Default executor for Sidekiq backend
+    class Sidekiq
       class << self
         def call(instance, method, *args)
-          executor.perform_later(instance, method, *args)
+          executor.perform_async(instance, method, *args)
         end
 
         def executor
           @executor ||= begin
-            return unless defined? Applicationjob
+            Class.new(Sidekiq) do
+              include ::Sidekiq::Worker
 
-            Class.new(ApplicationJob) do
-              def perform_later(instance, method, *args)
+              def perform_async(instance, method, *args)
                 instance.public_send(method, *args)
               end
             end

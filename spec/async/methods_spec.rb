@@ -1,11 +1,17 @@
 # frozen_string_literal: true
 
+require 'sidekiq'
+
 RSpec.describe Anachronic do
+  subject { ExampleClass.new.hello }
+
   before do
     class ExampleClass
       extend Anachronic
 
-      async def hello; end
+      async def hello
+        puts 'World!'
+      end
     end
   end
 
@@ -14,7 +20,12 @@ RSpec.describe Anachronic do
   end
 
   it 'does something useful' do
-    expect(Anachronic::BackgroundExecutor).to receive(:call)
-    expect { ExampleClass.new.hello }.to_not raise_error
+    allow(Anachronic::BackgroundExecutor).to receive(:call)
+
+    subject
+  end
+
+  it 'does not raise erorrs' do
+    expect { subject }.to_not raise_error
   end
 end

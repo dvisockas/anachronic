@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
-require_relative './error.rb'
+require 'anachronic/error'
+require 'anachronic/executors/sidekiq'
+require 'anachronic/executors/application_job'
+require 'anachronic/executors/resque'
 
 module Anachronic
   # Class for deciding a background execution backend
@@ -16,18 +19,18 @@ module Anachronic
 
       def executor
         @executor ||= begin
-          return Executors::ApplicationJob if default_or_defined?(ApplicationJob)
-          return Executors::Sidekiq if default_or_defined?(Sidekiq)
-          return Executors::Resque if default_or_defined?(Resque)
+          return Anachronic::Executors::Sidekiq if defined?('Sidekiq')
+          return Anachronic::Executors::ApplicationJob if defined?('ApplicationJob')
+          return Anachronic::Executors::Resque if defined?('Resque')
         end
       end
 
       def default_or_defined?(name)
-        defined?(name) || config.default_executor == name
+        defined?(name.constantize) || config.default_executor.name == name
       end
 
       def no_executor
-        raise Anachronic::Error('No background executor found')
+        raise Error('No background executor found')
       end
     end
   end

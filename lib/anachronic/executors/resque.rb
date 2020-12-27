@@ -2,19 +2,19 @@
 
 module Anachronic
   module Executors
-    # Default executor for ApplicationJob backend
-    class ApplicationJob
+    # Default executor for Resque backend
+    class Resque
       class << self
         def call(instance, method, *args)
-          executor.perform_later(instance, method, *args)
+          executor.perform(instance, method, *args)
         end
 
         def executor
           @executor ||= begin
-            return unless defined? Applicationjob
+            return unless defined? Resque
 
-            Class.new(ApplicationJob) do
-              def perform_later(instance, method, *args)
+            Class.new(Resque) do
+              def self.perform(instance, method, *args)
                 instance.public_send(method, *args)
               end
             end

@@ -61,8 +61,8 @@ end
 ```
 
 In case no `default_exeucutor` is configured, the gem will use the first one that is available (defined) from the list:
-- ApplicationJob
 - Sidekiq
+- ApplicationJob
 - Resque
 
 

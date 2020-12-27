@@ -3,14 +3,10 @@
 require 'anachronic/version'
 require 'anachronic/background_executor'
 require 'anachronic/error'
+require 'anachronic/override'
+require 'anachronic/configuration'
 
 module Anachronic
-  def self.async(method_name)
-    new_name = "anachronic__#{method_name}".to_sym
-    alias_method new_name, method_name
-
-    define_method(method_name) do |*args|
-      BackgroundExecutor.call(self, new_name, *args)
-    end
-  end
+  include Override
+  include Configuration
 end

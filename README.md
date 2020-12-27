@@ -50,9 +50,21 @@ Or install it yourself as:
 
     $ gem install anachronic
 
-## Usage
+## Configuration
 
-TODO: Write usage instructions here
+To configure, run this or add to an initializers file (in case of Rails)
+
+```ruby
+Anachronic.configure do |config|
+  config.default_executor = Sidekiq
+end
+```
+
+In case no `default_exeucutor` is configured, the gem will use the first one that is available (defined) from the list:
+- ApplicationJob
+- Sidekiq
+- Resque
+
 
 ## Development
 

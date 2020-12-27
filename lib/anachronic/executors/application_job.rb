@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 module Anachronic
-    module Executors
-      class ApplicationJob
-        def self.call(instance, method, *args)
+  module Executors
+    # Default executor for ApplicationJob backend
+    class ApplicationJob
+      class << self
+        def call(instance, method, *args)
           default_executor.perform_later(instance, method, *args)
         end
 
-        def self.default_executor
+        def default_executor
           @default_executor ||= begin
             Class.new(ApplicationJob) do
               def perform_later(instance, method, *args)

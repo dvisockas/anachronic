@@ -7,6 +7,6 @@ require 'anachronic/override'
 require 'anachronic/configuration'
 
 module Anachronic
-  include Override
-  include Configuration
+  include Anachronic::Override
+  include Anachronic::Configuration
 end
